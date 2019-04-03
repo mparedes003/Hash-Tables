@@ -157,8 +157,6 @@ void destroy_hash_table(BasicHashTable *ht)
     // Use destroy_pair function to free any malloc'ed memory
     destroy_pair(pair);
   }
-  // Set each index in the storage index array to NULL
-  ht->storage[i] = NULL;
   // Free the hash table storage
   free(ht->storage);
   // Free the hash table

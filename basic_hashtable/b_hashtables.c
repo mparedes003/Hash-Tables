@@ -110,6 +110,14 @@ void hash_table_insert(BasicHashTable *ht, char *key, char *value)
  ****/
 void hash_table_remove(BasicHashTable *ht, char *key)
 {
+  // Hash the key to get the array index
+  unsigned int index = hash(key, ht->capacity);
+
+  if (ht->storage[index])
+  {
+    // Use destroy_pair function to free any malloc'ed memory
+    destroy_pair(ht->storage[index]);
+  }
 }
 
 /****

@@ -89,6 +89,18 @@ BasicHashTable *create_hash_table(int capacity)
  ****/
 void hash_table_insert(BasicHashTable *ht, char *key, char *value)
 {
+  // Hash the key to get the array index
+  unsigned int index = hash(key, ht->capacity);
+
+  if (ht->storage[index])
+  {
+    printf("WARNING: EXISTING VALUE OVERWRITTEN!\n");
+    // Use destroy_pair function to free any malloc'ed memory
+    destroy_pair(ht->storage[index]);
+  }
+  // Use create_pair function to create a pair and
+  // assign its value to the array index
+  ht->storage[index] = create_pair(key, value);
 }
 
 /****

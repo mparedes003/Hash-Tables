@@ -147,6 +147,22 @@ char *hash_table_retrieve(BasicHashTable *ht, char *key)
  ****/
 void destroy_hash_table(BasicHashTable *ht)
 {
+  // Iterate over the hash table until i is less than
+  // the count hash table's capacity
+  for (int i = 0; i < ht->capacity; i++)
+  {
+    // Assign the value of hash table storage array index
+    // to the pointer pair
+    Pair *pair = ht->storage[i];
+    // Use destroy_pair function to free any malloc'ed memory
+    destroy_pair(pair);
+  }
+  // Set each index in the storage index array to NULL
+  ht->storage[i] = NULL;
+  // Free the hash table storage
+  free(ht->storage);
+  // Free the hash table
+  free(ht);
 }
 
 #ifndef TESTING

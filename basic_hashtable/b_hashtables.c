@@ -117,6 +117,8 @@ void hash_table_remove(BasicHashTable *ht, char *key)
   {
     // Use destroy_pair function to free any malloc'ed memory
     destroy_pair(ht->storage[index]);
+    // Assign the value of NULL to the array index
+    ht->storage[index] = NULL;
   }
 }
 
@@ -127,6 +129,14 @@ void hash_table_remove(BasicHashTable *ht, char *key)
  ****/
 char *hash_table_retrieve(BasicHashTable *ht, char *key)
 {
+  // Hash the key to get the array index
+  unsigned int index = hash(key, ht->capacity);
+
+  if (ht->storage[index])
+  {
+    // return the value of the pair at the array index specified
+    return ht->storage[index]->value;
+  }
   return NULL;
 }
 
